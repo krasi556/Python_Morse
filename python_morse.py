@@ -11,6 +11,7 @@ morse_code = {'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.':
 
 text = input()
 class InputListener:
+
     def __init__(self):
         pass
     def on_press(self,key):
@@ -19,5 +20,6 @@ class InputListener:
     def on_release(self,key):
         pass
 
-with keyboard.Listener(on_press,on_release) as listener:
-    listener.join()
+listener = InputListener
+with keyboard.Listener(on_press = listener.on_press,on_release = listener.on_release) as l:
+    l.join()
