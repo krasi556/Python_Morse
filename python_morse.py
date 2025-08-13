@@ -1,4 +1,5 @@
-import pynput
+from pynput import keyboard
+
 morse_code = {'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F', '--.': 'G', '....': 'H',
               '..': 'I',
               '.---': 'J', '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q',
@@ -13,3 +14,5 @@ def on_press(key):
 def on_release(key):
     pass
 
+with keyboard.Listener(on_press,on_release) as l:
+    l.join()
