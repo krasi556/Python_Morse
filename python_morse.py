@@ -21,7 +21,10 @@ class InputListener:
     def on_release(self,key):
         if key == keyboard.Key.space and self.press_time is not None:
             duration = time.time() - self.press_time
-            
+            if duration < 0.3:
+                pass
+            else:
+                pass
 
 listener = InputListener()
 
