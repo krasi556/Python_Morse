@@ -13,7 +13,7 @@ text = input()
 class InputListener:
     def __init__(self):
         self.press_time = None
-
+        self.sentence = []
     def on_press(self,key):
         if key == keyboard.Key.space and self.press_time is None:
             self.press_time = time.time()
@@ -22,11 +22,18 @@ class InputListener:
         if key == keyboard.Key.space and self.press_time is not None:
             duration = time.time() - self.press_time
             if duration < 0.3:
-                pass
+                self.sentence.append('.')
             elif 0.3 <= duration <= 0.9:
-                pass
+                self.sentence.append('-')
             else:
-                pass
+                self.sentence.append(' ')
+
+    def on_esc(self,key):
+        pass
+
+    def on_enter(self,key):
+        pass
+
 listener = InputListener()
 
 with keyboard.Listener(on_press = listener.on_press,on_release = listener.on_release) as l:
