@@ -9,17 +9,18 @@ morse_code = {'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.':
               '-----': '0', '.----': '1', '..---': '2', '...--': '3', '....-': '4','.....': '5', '-....': '6',
               '--...': '7', '---..': '8', '----.': '9'}
 
-text = input()
 class InputListener:
     def __init__(self):
         self.press_time = None
-        self.sentence = []
+        self.sentence = ''
+        self.final_sentence = []
+
     def on_press(self,key):
-        if key == keyboard.Key.space and self.press_time is None:
+        if key == keyboard.Key.space_and_seperate and self.press_time is None:
             self.press_time = time.time()
 
     def on_release(self,key):
-        if key == keyboard.Key.space and self.press_time is not None:
+        if key == keyboard.Key.space_and_seperate and self.press_time is not None:
             duration = time.time() - self.press_time
             if duration < 0.3:
                 self.sentence.append('.')
@@ -27,12 +28,26 @@ class InputListener:
                 self.sentence.append('-')
             else:
                 self.sentence.append(' ')
-
-    def on_esc(self,key):
-        pass
-
-    def on_enter(self,key):
-        pass
+        elif key == keyboard.Key.esc:
+            print('Exiting')
+            exit()
+        elif key == keyboard.Key.enter:
+            pass
+        
+    def space_and_seperate(self):
+        if self.sentence:
+            is_found = False
+            for code in morse_code:
+                if self.sentence == code:
+                    letter = morse_code[code]
+                    self.final_sentence.append(letter)
+                    is_found = True
+                    break
+            if not is_found:
+                letter = '?'
+                self.final_sentence.append(letter)
+            print(f'{letter}',end='')
+            self.sentence = ''
 
 listener = InputListener()
 
