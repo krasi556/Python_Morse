@@ -23,9 +23,10 @@ class InputListener:
             duration = time.time() - self.press_time
             if duration < 0.3:
                 pass
+            elif 0.3 <= duration <= 0.9:
+                pass
             else:
                 pass
-
 listener = InputListener()
 
 with keyboard.Listener(on_press = listener.on_press,on_release = listener.on_release) as l:
