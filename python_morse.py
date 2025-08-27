@@ -20,20 +20,22 @@ class InputListener:
             self.press_time = time.time()
 
     def on_release(self,key):
-        if key == keyboard.Key.space_and_seperate and self.press_time is not None:
+        if key == keyboard.Key.space and self.press_time is not None:
             duration = time.time() - self.press_time
             if duration < 0.3:
-                self.sentence.append('.')
+                self.sentence += ('.')
             elif 0.3 <= duration <= 0.9:
-                self.sentence.append('-')
+                self.sentence += ('-')
             else:
-                self.sentence.append(' ')
+                self.sentence += (' ')
         elif key == keyboard.Key.esc:
             print('Exiting')
             exit()
         elif key == keyboard.Key.enter:
-            pass
-        
+            self.space_and_seperate()
+            print(''.join(self.final_sentence))
+
+
     def space_and_seperate(self):
         if self.sentence:
             is_found = False
