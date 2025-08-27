@@ -24,15 +24,17 @@ class InputListener:
             duration = time.time() - self.press_time
             if duration < 0.3:
                 self.sentence += ('.')
+                print('.',end = '',flush=True)
             elif 0.3 <= duration <= 0.9:
                 self.sentence += ('-')
+                print('-', end='', flush=True)
             else:
                 self.space_and_seperate()
             self.press_time = None
+
         elif key == keyboard.Key.enter:
             self.space_and_seperate()
-            print(f'Sentence: {"".join(self.final_sentence)}')
-
+            print(f'Sentence: {"".join(self.final_sentence)}\n')
 
         elif key == keyboard.Key.esc:
             print('Exiting')
@@ -51,7 +53,7 @@ class InputListener:
             if not is_found:
                 letter = '?'
                 self.final_sentence.append(letter)
-            print(f'{letter}',end='')
+            print(f'Letter: [{letter}]\n',flush=True)
             self.sentence = ''
 
 listener = InputListener()
