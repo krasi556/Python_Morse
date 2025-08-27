@@ -24,12 +24,12 @@ class InputListener:
             duration = time.time() - self.press_time
             if duration < 0.3:
                 self.sentence += ('.')
-                print('.',end = '',flush=True)
+                print('.',end = '')
             elif 0.3 <= duration <= 0.9:
                 self.sentence += ('-')
-                print('-', end='', flush=True)
+                print('-', end='')
             else:
-                self.space_and_seperate()
+                self.final_sentence.append(' ')
             self.press_time = None
 
         elif key == keyboard.Key.enter:
@@ -53,7 +53,7 @@ class InputListener:
             if not is_found:
                 letter = '?'
                 self.final_sentence.append(letter)
-            print(f'Letter: [{letter}]\n',flush=True)
+            print(f'Letter: [{letter}]\n')
             self.sentence = ''
 
 listener = InputListener()
