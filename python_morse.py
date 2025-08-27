@@ -16,7 +16,7 @@ class InputListener:
         self.final_sentence = []
 
     def on_press(self,key):
-        if key == keyboard.Key.space_and_seperate and self.press_time is None:
+        if key == keyboard.Key.space and self.press_time is None:
             self.press_time = time.time()
 
     def on_release(self,key):
@@ -27,13 +27,16 @@ class InputListener:
             elif 0.3 <= duration <= 0.9:
                 self.sentence += ('-')
             else:
-                self.sentence += (' ')
+                self.space_and_seperate()
+            self.press_time = None
+        elif key == keyboard.Key.enter:
+            self.space_and_seperate()
+            print(f'Sentence: {"".join(self.final_sentence)}')
+
+
         elif key == keyboard.Key.esc:
             print('Exiting')
             exit()
-        elif key == keyboard.Key.enter:
-            self.space_and_seperate()
-            print(''.join(self.final_sentence))
 
 
     def space_and_seperate(self):
