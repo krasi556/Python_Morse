@@ -37,7 +37,7 @@ class InputListener:
             print(f'Sentence: {"".join(self.final_sentence)}\n')
 
         elif key == keyboard.Key.esc:
-            print('Exiting')
+            print(f'The sentence is: {"".join(self.final_sentence)}\nExiting.....')
             exit()
 
 
