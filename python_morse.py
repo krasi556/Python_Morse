@@ -28,8 +28,6 @@ class InputListener:
             elif 0.3 <= duration <= 0.9:
                 self.sentence += ('-')
                 print('-', end='')
-            else:
-                self.final_sentence.append(' ')
             self.press_time = None
 
         elif key == keyboard.Key.enter:
