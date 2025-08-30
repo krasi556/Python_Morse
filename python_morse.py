@@ -15,6 +15,7 @@ class InputListener:
         self.press_time = None
         self.sentence = ''
         self.final_sentence = []
+        self.is_space = False
 
     def on_press(self,key):
         if key == keyboard.Key.space and self.press_time is None:
@@ -26,9 +27,11 @@ class InputListener:
             if duration < 0.3:
                 self.sentence += ('.')
                 print('.',end = '')
+                self.is_space = False
             elif 0.3 <= duration <= 0.9:
                 self.sentence += ('-')
                 print('-', end='')
+                self.is_space = False
             else:
                 self.space_and_seperate()
             self.press_time = None
@@ -40,14 +43,21 @@ class InputListener:
                 print('Word separator added ')
                 self.sentence = ''
                 self.space_time = None
-                
+                self.is_space = True
+
             else:
-                self.space_and_seperate()
-                print(f'Sentence: {"".join(self.final_sentence)}\n')
+                if not self.is_space:
+                    self.space_and_seperate()
+                    print(f'Sentence: {"".join(self.final_sentence)}\n')
+                else:
+                    self.is_space = False
                 self.space_time = space_time
 
         elif key == keyboard.Key.esc:
-            print(f'The sentence is: {"".join(self.final_sentence)}\nExiting.....')
+            if self.final_sentence:
+                print(f'The sentence is: {"".join(self.final_sentence)}\nExiting.....')
+            else:
+                print('Exiting.....')
             exit()
     def space_and_seperate(self):
         if self.sentence:
